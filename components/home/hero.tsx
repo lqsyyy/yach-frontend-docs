@@ -46,7 +46,7 @@ export default function Hero(locate: string) {
           {heroMap[locate].subtitleTwo}
         </p>
         <div className={styles.actions}>
-          <Link className={styles.cta} href={`${locate}/docs/start`}>
+          <Link className={styles.cta} href={`${locate}/docs/codeStandard`}>
             {heroMap[locate].cta} <span>→</span>
           </Link>
           <a

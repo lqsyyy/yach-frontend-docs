@@ -4,6 +4,12 @@
   float: right;
 }
 
+.pagelogo img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
 @media (max-width: 850px) {
   .pagelogo {
     height: 0;
