@@ -27,7 +27,7 @@ export default withNextra({
   redirects: () => [
     {
       source: '/',
-      destination: '/zh/docs/start',
+      destination: '/zh/docs/codeStandard',
       permanent: true
     }
   ]
