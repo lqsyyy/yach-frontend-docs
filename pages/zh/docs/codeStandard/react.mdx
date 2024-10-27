@@ -48,17 +48,6 @@ export default () => {
 使用 `React.lazy` 进行代码拆分仅适用于默认导出的组件。
 </Callout>
 
-## 使用 JSX 语法
-
-使用 JSX 语法而不是 React.createElement
-
-**✅ Good:**
-
-```js
-const MyComponent = () => {
-  return <div>My Component</div>
-}
-
 ## 列表中的键
 
 挑选键的最佳方法是使用一个字符串，该字符串可在同级列表中唯一标识列表项。 如果项的顺序可能发生变化，则不建议为键使用索引。 这会对性能产生负面影响，并可能导致组件状态出现问题

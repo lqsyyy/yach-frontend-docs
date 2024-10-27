@@ -1,6 +1,47 @@
+import { Callout, FileTree } from 'nextra/components'
+
 # 命名规则
 
-## 命名规范
+## 文件夹命名 (kebab-case)
+
+<FileTree>
+  <FileTree.Folder name="add-todo" defaultOpen>
+    <FileTree.File name="addTodo.scss" />
+  </FileTree.Folder>
+  <FileTree.Folder name="todos" defaultOpen>
+    <FileTree.File name="todos.scss" />
+  </FileTree.Folder>
+</FileTree>
+
+## 文件命名 (camelCase)
+
+<FileTree>
+  <FileTree.Folder name="add-todo" defaultOpen>
+    <FileTree.File name="addTodo.scss" />
+  </FileTree.Folder>
+  <FileTree.Folder name="todos" defaultOpen>
+    <FileTree.File name="todos.scss" />
+  </FileTree.Folder>
+</FileTree>
+
+## 组件文件命名 (PascalCase)
+
+<FileTree>
+  <FileTree.Folder name="components" defaultOpen>
+    <FileTree.File name="App.jsx" />
+	<FileTree.File name="Button.tsx" />
+  </FileTree.Folder>
+  <FileTree.Folder name="add-todo" defaultOpen>
+    <FileTree.File name="AddTodo.jsx" />
+  </FileTree.Folder>
+  <FileTree.Folder name="headline" defaultOpen>
+    <FileTree.File name="Headline.jsx" />
+  </FileTree.Folder>
+</FileTree>
+
+<Callout type="default">
+用帕斯卡命名法（PascalCase）来命名组件文件，就像组件本身的命名方式一样
+</Callout>
 
 ### 常量命名 (UPPER_CASE)
 
@@ -20,5 +61,116 @@ let myVariable = 'Hello World';
 function myFunction() {
   // ...
 }
+
+function handleShowCategory() {
+    // ...
+}
+
+function onClickTitle() {
+    // ...
+}
 ```
+
+<Callout type="default">
+函数的名称应尽可能具有自解释性。处理用户交互的函数名称以 “handle” 或者 “on” 开头。
+</Callout>
+
+## 布尔值命名
+
+```javascript
+let isDone = true;
+let hasError = false;
+let canEdit = true;
+let shouldShow = false;
+function isUserLoggedIn() {
+    
+}
+```
+
+<Callout type="default">
+	在布尔值前加上 `is`, `has`, `can` 或者 `should` (e.g. `isLoading`, `hasTitle` 或者 `shouldShowImage`)
+</Callout>
+
+## 使用具名导出而不是默认导出的方式来处理工具函数
+
+**✅ Good:**
+```tsx
+export function getDate() {
+    // ...
+}
+
+export const getDate = () => {
+    // ...
+};
+```
+
+**❌ Bad:**
+```tsx
+function getDate() {
+    // ...
+}
+
+export default getDate;
+```
+
+## 使用 `use` 前缀来命名 `React Hook` 函数
+
+```tsx
+function useFetchData() {
+    // ...
+}
+
+const useFetchData = () => {
+    // ...
+};
+```
+
+## 在文件名中使用关键词
+
+**✅ Good:**
+<FileTree>
+	<FileTree.Folder name="src" defaultOpen>
+		<FileTree.Folder name="utils" defaultOpen>
+			<FileTree.File name="logger.ts" />
+			<FileTree.File name="viewport.js" />
+		</FileTree.Folder>
+	</FileTree.Folder>
+</FileTree>
+
+**❌ Bad:**
+
+<FileTree>
+	<FileTree.Folder name="src" defaultOpen>
+		<FileTree.Folder name="utils" defaultOpen>
+			<FileTree.File name="initializeLogger.ts" />
+			<FileTree.File name="getWindowHeight.js" />
+		</FileTree.Folder>
+	</FileTree.Folder>
+</FileTree>
+
+`viewport.js` 如下所示:
+
+```javascript
+// As a function declaration
+export function getWindowHeight() {
+    // ...
+}
+
+export function getScrollPosition() {
+    // ...
+}
+
+// Or as an arrow function
+export const getWindowHeight = () => {
+    // ...
+};
+
+export const getScrollPosition = () => {
+    // ...
+};
+```
+<Callout type="default">
+按照包含的函数的主题来命名实用工具文件，这样多个函数可以相邻存放而无需为每个函数创建一个新文件。这使得实用工具更容易被找到
+</Callout>
+
 

@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components'
+import { Callout, Link } from 'nextra/components'
 
 # 编辑器配置
 
@@ -6,8 +6,7 @@ import { Callout } from 'nextra/components'
 
 在根目录创建`.editorconfig` 文件：
 
-EditorConfig 有助于为不同 IDE 编辑器上处理同一项目的多个开发人员维护一致的代码风格。
-官网：editorconfig.org
+[EditorConfig](https://editorconfig.org) 有助于为不同 IDE 编辑器上处理同一项目的多个开发人员维护一致的代码风格
 
 ``` .editorconfig
 # http://editorconfig.org
@@ -25,12 +24,9 @@ trim_trailing_whitespace = true
 [*.md]
 max_line_length = 0
 trim_trailing_whitespace = false
-
 ```
 
 <Callout type="default">
-VSCode 使用 EditorConfig 需要去插件市场下载插件 EditorConfig VS Code
+VSCode 使用 EditorConfig 需要去插件市场下载插件 EditorConfig VS Code <br/>
 JetBrains 系列 （WebStorm、IntelliJ IDEA）则不用额外安装插件，可直接使用 EditorConfig 配置。
 </Callout>
-
-## 
