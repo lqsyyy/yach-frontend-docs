@@ -1,5 +1,7 @@
 export default {
-  "editor": "编辑器配置",
+  "editor": "编辑器",
   "naming-rules": "命名规则",
-  "react": "React"
+  "react": "React",
+  "vue": "Vue",
+  "comment": "注释"
 }

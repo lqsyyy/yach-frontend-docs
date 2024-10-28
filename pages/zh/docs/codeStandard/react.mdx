@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # React
 
@@ -10,8 +10,8 @@ import { Callout } from 'nextra/components'
 
 ```js
 const MyComponent = () => {
-  return <div>My Component</div>
-}
+  return <div>My Component</div>;
+};
 ```
 
 **❌ Bad:**
@@ -19,34 +19,63 @@ const MyComponent = () => {
 ```js
 class MyComponent extends React.Component {
   render() {
-    return <div>My Component</div>
+    return <div>My Component</div>;
   }
 }
 ```
 
 ## 组件作为默认设置导出
 
-将组件作为默认设置导出
-
 **✅ Good:**
 
 ```js
-export default MyComponent
+const MyComponent = () => {
+  return <div>My Component</div>;
+};
+
+export default MyComponent;
 ```
 
 **❌ Bad:**
 
 ```js
-export { MyComponent }
+const MyComponent = () => {
+  return <div>My Component</div>;
+};
 
-export default () => {
+export { MyComponent };
 
-}
+export default () => {};
 ```
 
 <Callout type="default">
-使用 `React.lazy` 进行代码拆分仅适用于默认导出的组件。
+  使用 `React.lazy` 进行代码拆分仅适用于默认导出的组件。
 </Callout>
+
+## 组件导入
+
+**✅ Good:**
+
+```js
+import MyComponent from "./my-component";
+```
+
+**❌ Bad:**
+
+```js
+import { MyComponent } from "./MyComponent";
+```
+
+## 组件命名
+
+使用 PascalCase 命名组件
+
+**✅ Good:**
+
+````js
+const MyComponent = () => {
+  return <div>My Component</div>
+}
 
 ## 列表中的键
 
@@ -56,7 +85,7 @@ export default () => {
 
 ```js
 array.map((item, index) => <Component key={item.id} {...item}>)
-```
+````
 
 **❌ Bad:**
 
@@ -71,7 +100,7 @@ array.map((item, index) => <Component key={index} {...item}>)
 **✅ Good:**
 
 ```js
-const [number, setNumber] = useState(1)
+const [number, setNumber] = useState(1);
 
 return (
   <div>
@@ -83,7 +112,7 @@ return (
       Decrease
     </button>
   </div>
-)
+);
 ```
 
 **❌ Bad:**
@@ -100,19 +129,19 @@ return (
 )
 ```
 
-## useEffect 依赖关系数组 
+## useEffect 依赖关系数组
 
 使用 useEffect 依赖关系数组触发副作用，使代码更简洁
 
 **✅ Good:**
 
 ```js
-const [page, setPage] = useState(1)
+const [page, setPage] = useState(1);
 
 useEffect(() => {
-  requestListUser()
+  requestListUser();
   // calls useEffect when page state changes
-}, [page])
+}, [page]);
 
 return (
   <div>
@@ -120,32 +149,32 @@ return (
       Next Page
     </button>
   </div>
-)
+);
 ```
 
 **❌ Bad:**
 
 ```js
-const [page, setPage] = useState(1)
+const [page, setPage] = useState(1);
 
 useEffect(() => {
-  requestListUser()
-}, [])
+  requestListUser();
+}, []);
 
 const requestListUser = () => {
-  setPage((prevState) => prevState + 1)
+  setPage((prevState) => prevState + 1);
   // ...
   // any code to return user list
-}
+};
 
 return (
   <div>
     <button onClick={() => requestListUser()}>Next Page</button>
   </div>
-)
+);
 ```
 
-## 可读组件 
+## 可读组件
 
 避免创建非常庞大的组件。 尽可能将其划分为子组件，以便更好地理解和阅读代码
 
@@ -167,7 +196,7 @@ const Screen = () => (
       </List>
     </Main>
   </Container>
-)
+);
 ```
 
 **❌ Bad:**
@@ -189,10 +218,10 @@ const Screen = () => (
       </Box>
     </Box>
   </Box>
-)
+);
 ```
 
-## 避免直接比较字符串 
+## 避免直接比较字符串
 
 当知道所有可能的值时，我们可以使用枚举来实现更好的可读性和控制
 
@@ -200,44 +229,36 @@ const Screen = () => (
 
 ```tsx
 const FEEDBACK = {
-  CORRECT: 'correct',
-  INCORRECT: 'incorrect',
-}
+  CORRECT: "correct",
+  INCORRECT: "incorrect",
+};
 
 const MyComponent = (type) => {
-  const text = type === FEEDBACK.CORRECT ? '😎' : '😢'
-  
-  return (
-    <Emoji>
-      {text}
-    </Emoji>
-  )
-}
+  const text = type === FEEDBACK.CORRECT ? "😎" : "😢";
+
+  return <Emoji>{text}</Emoji>;
+};
 ```
 
 **❌ Bad:**
 
 ```tsx
 const MyComponent = (type) => {
-  const text = type === 'correct' ? '😎' : '😢'
+  const text = type === "correct" ? "😎" : "😢";
 
-  return (
-    <Emoji>
-      {text}
-    </Emoji>
-  )
-}
+  return <Emoji>{text}</Emoji>;
+};
 ```
 
 ## 使用扩展运算符
 
-在创建组件包装器时，我们可以扩展原始组件的类型。这样封装器就会自动扩展原始组件的所有prop，也可以避免在透传组件增加不必要的类型定义
+在创建组件包装器时，我们可以扩展原始组件的类型。这样封装器就会自动扩展原始组件的所有 prop，也可以避免在透传组件增加不必要的类型定义
 
 **✅ Good:**
 
 ```tsx
-import { MenuItem, TextField } from '@mui/material';
-import { TextFieldProps } from '@mui/material';
+import { MenuItem, TextField } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
 
 export type SelectOption = { value: string; label: string };
 
@@ -261,7 +282,7 @@ const Select = ({ options, ...props }: SelectProps) => {
 **❌ Bad:**
 
 ```tsx
-import { MenuItem, TextField } from '@mui/material';
+import { MenuItem, TextField } from "@mui/material";
 
 export type SelectOption = { value: string; label: string };
 
@@ -279,7 +300,7 @@ const Select = ({
   onChange,
   value,
   onBlur,
-} : SelectProps) => {
+}: SelectProps) => {
   return (
     <TextField
       disabled={disabled}
@@ -306,26 +327,27 @@ const Select = ({
 **✅ Good:**
 
 ```tsx
-import { useState } from 'react'
-import Welcome from '../components/Welcome'
+import { useState } from "react";
+import Welcome from "../components/Welcome";
 
 const HomePage = () => {
-  const [showWelcome, setShowWelcome] = useState(true)
-  return showWelcome && <Welcome />
+  const [showWelcome, setShowWelcome] = useState(true);
+  return showWelcome && <Welcome />;
 };
 ```
 
 **❌ Bad:**
 
 ```tsx
-import { useState } from 'react'
-import Welcome from '../components/Welcome'
+import { useState } from "react";
+import Welcome from "../components/Welcome";
 
 const HomePage = () => {
-  const [showWelcome, setShowWelcome] = useState(true)
-  return showWelcome ? <Welcome /> : <></>
+  const [showWelcome, setShowWelcome] = useState(true);
+  return showWelcome ? <Welcome /> : <></>;
 };
 ```
+
 ## 使用三元运算符
 
 当我们需要验证两个逻辑情况并返回组件时，我们可以使用三元运算符而不是 if…else
@@ -333,31 +355,31 @@ const HomePage = () => {
 **✅ Good:**
 
 ```tsx
-import { useState } from 'react'
-import Welcome from '../components/Welcome'
-import Dashboard from '../components/Dashboard'
+import { useState } from "react";
+import Welcome from "../components/Welcome";
+import Dashboard from "../components/Dashboard";
 
 const HomePage = () => {
-  const [showWelcome, setShowWelcome] = useState(false)
-  return showWelcome ? <Welcome /> : <Dashboard />
+  const [showWelcome, setShowWelcome] = useState(false);
+  return showWelcome ? <Welcome /> : <Dashboard />;
 };
 ```
 
 **❌ Bad:**
 
 ```tsx
-import { useState } from 'react'
-import Welcome from '../components/Welcome'
-import Dashboard from '../components/Dashboard'
+import { useState } from "react";
+import Welcome from "../components/Welcome";
+import Dashboard from "../components/Dashboard";
 
 const HomePage = () => {
-  const [showWelcome, setShowWelcome] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(false);
 
   if (!showWelcome) {
-    return <Dashboard />
+    return <Dashboard />;
   }
 
-  return <Welcome />
+  return <Welcome />;
 };
 ```
 
@@ -387,31 +409,31 @@ const HomePage = () => {
 
 ```tsx
 const TodoItem = ({ text, checked }) => (
-    <div className="todo">
-        <Checkbox className="todo__checkbox" checked={checked} />
-        <div>{text}</div>
-    </div>
+  <div className="todo">
+    <Checkbox className="todo__checkbox" checked={checked} />
+    <div>{text}</div>
+  </div>
 );
 
 const TodoItem = ({ text, checked }) => {
-    const { text, checked } = props;
-    return (
-        <div className="todo">
-            <Checkbox className="todo__checkbox" checked={checked} />
-            <div>{text}</div>
-        </div>
-    );
-}
+  const { text, checked } = props;
+  return (
+    <div className="todo">
+      <Checkbox className="todo__checkbox" checked={checked} />
+      <div>{text}</div>
+    </div>
+  );
+};
 ```
 
 **❌ Bad:**
 
 ```tsx
 const TodoItem = (props) => (
-    <div className="todo">
-        <Checkbox className="todo__checkbox" checked={props.checked} />
-        <div>{props.text}</div>
-    </div>
+  <div className="todo">
+    <Checkbox className="todo__checkbox" checked={props.checked} />
+    <div>{props.text}</div>
+  </div>
 );
 ```
 
@@ -420,21 +442,53 @@ const TodoItem = (props) => (
 传递单个属性，而不是将多个属性组合成一个对象来传递。
 
 **✅ Good:**
+
 ```tsx
 const TodoItem = ({ id, title, text }) => (
-    <div className="todo">
-        <TodoTitle id={id} title={title} />
-        <div>{text}</div>
-    </div>
+  <div className="todo">
+    <TodoTitle id={id} title={title} />
+    <div>{text}</div>
+  </div>
 );
 ```
 
 **❌ Bad:**
+
 ```tsx
 const TodoItem = ({ todo }) => (
-    <div className="todo">
-        <TodoTitle id={todo.id} title={todo.title} />
-        <div>{todo.text}</div>
-    </div>
+  <div className="todo">
+    <TodoTitle id={todo.id} title={todo.title} />
+    <div>{todo.text}</div>
+  </div>
 );
 ```
+
+### 为组件绑定事件处理器
+
+为组件绑定事件处理器时，请使用箭头函数
+
+**✅ Good:**
+
+```tsx
+handleClick = () => {
+  console.log("this is:", this);
+};
+<button onClick={this.handleClick}> Click me </button>;
+```
+
+**❌ Bad:**
+
+```tsx
+ constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+ }
+ handleClick(){
+    console.log('this is:', this);
+ }
+ <button onClick={this.handleClick}> Click me </button>
+```
+
+### 提取 typescript 类型定义信息到 types.ts 文件中
+
+根据组件复杂度决定是否单独提取出来（代码行数、type 行数）

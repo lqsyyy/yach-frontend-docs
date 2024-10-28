@@ -1,47 +1,89 @@
-import { Callout, FileTree } from 'nextra/components'
+import { Callout, FileTree } from "nextra/components";
 
 # 命名规则
 
-## 文件夹命名 (kebab-case)
+## 文件和文件夹
+
+1. 字母全部小写，单词间用小短线-连接
+2. 如果一个文件夹下有多个同类型文件，则文件名应该是复数
+
+```javascript
+utils / components / auto - complete / data - picker.tsx;
+data - picker.scss;
+logo - knowledge.png;
+knowledge - intro.mp4;
+```
 
 <FileTree>
-  <FileTree.Folder name="add-todo" defaultOpen>
-    <FileTree.File name="addTodo.scss" />
+  <FileTree.Folder name="utils" defaultOpen>
+    <FileTree.File name="file-forward.ts" />
+    <FileTree.File name="code.ts" />
   </FileTree.Folder>
-  <FileTree.Folder name="todos" defaultOpen>
-    <FileTree.File name="todos.scss" />
-  </FileTree.Folder>
-</FileTree>
-
-## 文件命名 (camelCase)
-
-<FileTree>
-  <FileTree.Folder name="add-todo" defaultOpen>
-    <FileTree.File name="addTodo.scss" />
-  </FileTree.Folder>
-  <FileTree.Folder name="todos" defaultOpen>
-    <FileTree.File name="todos.scss" />
-  </FileTree.Folder>
-</FileTree>
-
-## 组件文件命名 (PascalCase)
-
-<FileTree>
   <FileTree.Folder name="components" defaultOpen>
-    <FileTree.File name="App.jsx" />
-	<FileTree.File name="Button.tsx" />
-  </FileTree.Folder>
-  <FileTree.Folder name="add-todo" defaultOpen>
-    <FileTree.File name="AddTodo.jsx" />
-  </FileTree.Folder>
-  <FileTree.Folder name="headline" defaultOpen>
-    <FileTree.File name="Headline.jsx" />
+    <FileTree.Folder name="auto-complete" defaultOpen>
+      <FileTree.File name="index.tsx" />
+      <FileTree.File name="index.scss" />
+    </FileTree.Folder>
+    <FileTree.Folder name="input" defaultOpen>
+      <FileTree.File name="index.tsx" />
+      <FileTree.File name="index.scss" />
+    </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
 
-<Callout type="default">
-用帕斯卡命名法（PascalCase）来命名组件文件，就像组件本身的命名方式一样
-</Callout>
+## React 中命名
+
+1. 组件名首字母大写（PascalCase）
+
+```tsx
+function App() {
+  return (
+    <div>
+      <Button />
+    </div>
+  );
+}
+
+function Button() {
+  return <button>Click me</button>;
+}
+```
+
+2. 样式属性名使用驼峰命名法（camelCase）
+
+```tsx
+const styles = {
+  button: {
+    backgroundColor: "blue",
+    color: "white",
+    padding: "10px 20px",
+  },
+};
+```
+
+## 使用具名导出而不是默认导出的方式来处理工具函数
+
+**✅ Good:**
+
+```tsx
+export function getDate() {
+  // ...
+}
+
+export const getDate = () => {
+  // ...
+};
+```
+
+**❌ Bad:**
+
+```tsx
+function getDate() {
+  // ...
+}
+
+export default getDate;
+```
 
 ### 常量命名 (UPPER_CASE)
 
@@ -52,8 +94,25 @@ const MAX_VALUE = 100;
 ### 变量命名 (camelCase)
 
 ```javascript
-let myVariable = 'Hello World';
+let thisIsMyName;
+
+let goodID;
+
+let reportURL;
+
+let AndroidVersion;
+
+let iOSVersion;
 ```
+
+<Callout type="default">
+  变量名不应少于三个字符(循环中使用的迭代变量 i,j,k
+  等除外)，过短的名字不能体现其代表等意义，将使代码变得不可读 <br />
+  使用的 ID 的地方一定全大写 <br />
+  使用的 URL 的地方一定全大写 <br />
+  涉及 Android 的，一律大写第一个字母 <br />
+  涉及 iOS 的，一律小写第一个，大写后两个字母
+</Callout>
 
 ### 函数命名 (camelCase)
 
@@ -63,16 +122,27 @@ function myFunction() {
 }
 
 function handleShowCategory() {
-    // ...
+  // ...
 }
 
 function onClickTitle() {
-    // ...
+  // ...
+}
+
+function fetchData() {
+  // ...
+}
+
+function Person(name) {
+  this.name = name;
 }
 ```
 
 <Callout type="default">
-函数的名称应尽可能具有自解释性。处理用户交互的函数名称以 “handle” 或者 “on” 开头。
+  函数的名称应尽可能具有自解释性。处理用户交互的函数名称以 “handle” 或者 “on”
+  开头 <br />
+  函数名应使用动词或动词短语，如 `fetchData` 或 `calculateTotal` <br />
+  构造函数大写第一个字母
 </Callout>
 
 ## 布尔值命名
@@ -82,70 +152,48 @@ let isDone = true;
 let hasError = false;
 let canEdit = true;
 let shouldShow = false;
-function isUserLoggedIn() {
-    
-}
+function isUserLoggedIn() {}
 ```
 
 <Callout type="default">
-	在布尔值前加上 `is`, `has`, `can` 或者 `should` (e.g. `isLoading`, `hasTitle` 或者 `shouldShowImage`)
+  在布尔值前加上 `is`, `has`, `can` 或者 `should` (e.g. `isLoading`, `hasTitle`
+  或者 `shouldShowImage`)
 </Callout>
-
-## 使用具名导出而不是默认导出的方式来处理工具函数
-
-**✅ Good:**
-```tsx
-export function getDate() {
-    // ...
-}
-
-export const getDate = () => {
-    // ...
-};
-```
-
-**❌ Bad:**
-```tsx
-function getDate() {
-    // ...
-}
-
-export default getDate;
-```
 
 ## 使用 `use` 前缀来命名 `React Hook` 函数
 
 ```tsx
 function useFetchData() {
-    // ...
+  // ...
 }
 
 const useFetchData = () => {
-    // ...
+  // ...
 };
 ```
 
 ## 在文件名中使用关键词
 
 **✅ Good:**
+
 <FileTree>
-	<FileTree.Folder name="src" defaultOpen>
-		<FileTree.Folder name="utils" defaultOpen>
-			<FileTree.File name="logger.ts" />
-			<FileTree.File name="viewport.js" />
-		</FileTree.Folder>
-	</FileTree.Folder>
+  <FileTree.Folder name="src" defaultOpen>
+    <FileTree.Folder name="utils" defaultOpen>
+      <FileTree.File name="logger.ts" />
+      <FileTree.File name="viewport.js" />
+    </FileTree.Folder>
+  </FileTree.Folder>
 </FileTree>
 
 **❌ Bad:**
 
 <FileTree>
-	<FileTree.Folder name="src" defaultOpen>
-		<FileTree.Folder name="utils" defaultOpen>
-			<FileTree.File name="initializeLogger.ts" />
-			<FileTree.File name="getWindowHeight.js" />
-		</FileTree.Folder>
-	</FileTree.Folder>
+  <FileTree.Folder name="src" defaultOpen>
+    <FileTree.Folder name="utils" defaultOpen>
+      <FileTree.File name="initializeLogger.ts" />
+      <FileTree.File name="getWindowHeight.js" />
+    </FileTree.Folder>
+  </FileTree.Folder>
 </FileTree>
 
 `viewport.js` 如下所示:
@@ -153,24 +201,23 @@ const useFetchData = () => {
 ```javascript
 // As a function declaration
 export function getWindowHeight() {
-    // ...
+  // ...
 }
 
 export function getScrollPosition() {
-    // ...
+  // ...
 }
 
 // Or as an arrow function
 export const getWindowHeight = () => {
-    // ...
+  // ...
 };
 
 export const getScrollPosition = () => {
-    // ...
+  // ...
 };
 ```
+
 <Callout type="default">
-按照包含的函数的主题来命名实用工具文件，这样多个函数可以相邻存放而无需为每个函数创建一个新文件。这使得实用工具更容易被找到
+  按照包含的函数的主题来命名实用工具文件，这样多个函数可以相邻存放而无需为每个函数创建一个新文件。这使得实用工具更容易被找到
 </Callout>
-
-

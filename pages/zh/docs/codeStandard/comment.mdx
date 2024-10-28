@@ -1,0 +1,112 @@
+import { Callout } from 'nextra/components'
+
+# 注释
+
+## 单行注释
+
+1. 单行注释应该紧跟在代码的上一行或同一行的末尾
+2. 注释内容与代码或上一行注释应保持至少一个空格的距离（规范通过 prettier 插件可以解决）
+
+**✅ Good:**
+
+```javascript
+if (key === 1) {
+  // set active tab
+  this.activeTab = key;
+}
+
+const activeTab = 1; // set active tab
+```
+
+**❌ Bad:**
+
+```javascript
+if (key === 1) {
+  //set active tab
+  this.activeTab = key;
+}
+
+const activeTab = 1;//set active tab
+```
+
+## 多行注释
+
+1. 多行注释通常用于文件头部，描述整个文件的功能，或者用于复杂逻辑的解释
+2. 多行注释应该有一个清晰的开始和结束，内容与星号之间保持一个空格
+
+**✅ Good:**
+
+```javascript
+/**
+ * 正确的多行注释
+ * 这是一个用于计算数组总和的函数
+ * @param {number[]} numbers - 要计算的数字数组
+ * @return {number} 数组的总和
+ */
+function sum(numbers) {
+  // ...
+}
+```
+
+**❌ Bad:**
+
+```javascript
+/* 错误的多行注释
+这是一个用于计算数组总和的函数
+@param {number[]} numbers - 要计算的数字数组
+@return {number} 数组的总和
+*/
+function sum(numbers) {
+  // ...
+}
+```
+
+## 避免注释整块代码
+
+**❌ Bad:**
+
+```javascript
+// 错误：注释掉的代码
+// function oldCalculate() {
+//   // ...
+// }
+```
+
+<Callout type="warning">
+  不应该在代码库中保留被注释掉的代码。这些代码往往是过时的，并且会给其他开发者带来困惑。如果需要保留代码的历史版本，应该使用版本控制系统git来管理。
+</Callout>
+
+## 特殊注释标记
+
+在代码中使用特殊的注释标记（如`TODO`, `FIXME`, `NOTE`）来标识需要特别注意的地方，这些标记可以帮助开发者快速定位到需要进一步工作的部分。
+
+1. `TODO`: 表示代码中将来需要添加或完成的功能。通常用于提醒开发者还有功能未实现或需要进一步的工作。
+2. `FIXME`: 指出代码中存在问题，需要修复。这通常表示代码能够运行，但结果可能不是预期的，或者代码本身可能不稳定。
+3. `HACK`: 指代码中的临时解决方案或者不够优雅的代码。这通常用于快速修复问题，但长远来看可能需要更好的解决方案。
+4. `NOTE`: 用于强调代码中的某个特别重要的信息，比如解释某个复杂算法的逻辑或者提醒为什么要以特定方式实现代码。
+5. `OPTIMIZE`: 提示代码的性能可以进一步优化。这不一定表示代码有问题，但可能存在提高效率的机会。
+6. `REVIEW`: 表示代码需要额外的审查，以确定是否满足需求或是否存在更好的实现方式。
+7. `DEPRECATED`: 表明代码已经过时，不应该被使用或将来会被移除。
+8. `NOCOMMIT`: 这是一个警告，表示代码不应该被提交到版本控制系统中。这常用于开发过程中的临时改动，如调试代码。
+
+```javascript
+// TODO: 增加异常处理
+function loadData() {
+  // ...
+}
+
+// FIXME: 这里的算法实现有问题，以后需要优化
+function calculate() {
+  // ...
+}
+
+// NOTE: 这是一个临时解决方法
+function temporaryFunction() {
+  // ...
+}
+
+// OPTIMIZE: 这个函数的性能可以进一步优化
+function optimizeFunction() {
+  // ...
+}
+```
