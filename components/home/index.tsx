@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Hero from './hero'
-import Feature from './feature'
 
 export default function Home() {
 
@@ -9,8 +8,7 @@ export default function Home() {
 
   return (
     <>
-    {Hero(locate)}
-    {Feature(locate)}
+      {Hero(locate)}
     </>
   )
 }

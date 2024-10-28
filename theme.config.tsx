@@ -44,17 +44,6 @@ const config: DocsThemeConfig = {
       </>
     )
   },
-  // footer: {
-  //   content: () => {
-  //     const { route } = useRouter()
-  //     const locate = route.includes('/en') ? '/en' : '/zh'
-  //     return (
-  //       <>
-  //         {Footer(locate)}
-  //       </>
-  //     )
-  //   }
-  // },
   sidebar: {
     defaultMenuCollapseLevel: 1,
     toggleButton: true
